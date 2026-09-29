@@ -2,93 +2,404 @@
 <html lang="km">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>E-KENZO TOP-UP</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#090b12;color:white}
-.wrap{max-width:900px;margin:auto;padding:20px}
-h1{font-size:38px}.hero,.card{background:#151927;border:1px solid #292f42;border-radius:20px;padding:20px;margin:15px 0}
-.games,.packs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-button,input{width:100%;padding:14px;border-radius:12px;border:1px solid #333a50;font-size:16px}
-button{background:#7657ff;color:white;font-weight:bold}
-.game,.pack{background:#111522;color:white}
-.active{border:2px solid #16d6a0}
-input{background:#10141f;color:white;margin:6px 0}
-.price{color:#16d6a0;font-weight:bold;margin-top:7px}
-#result{display:none;background:#103526;padding:20px;border-radius:15px;margin-top:15px}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Khmer",sans-serif;
+  background:#080b14;
+  color:white;
+}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:18px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#171b2d,#101426);
+  border:1px solid #292f48;
+  border-radius:28px;
+  padding:28px 22px;
+  margin-bottom:18px;
+  box-shadow:0 10px 30px #0008;
+}
+
+.hero h1{
+  margin:0;
+  font-size:34px;
+  line-height:1.2;
+}
+
+.hero p{
+  color:#aeb7cc;
+  font-size:16px;
+  margin-bottom:0;
+}
+
+.title{
+  font-size:23px;
+  font-weight:bold;
+  margin:24px 0 12px;
+}
+
+.games{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.game{
+  background:#121728;
+  border:2px solid #202740;
+  border-radius:20px;
+  padding:14px;
+  color:white;
+  text-align:left;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.game:hover{
+  transform:translateY(-2px);
+}
+
+.game.active{
+  border-color:#27d7ff;
+  box-shadow:0 0 15px #27d7ff33;
+}
+
+.game img{
+  width:100%;
+  height:120px;
+  object-fit:contain;
+  background:#0c101d;
+  border-radius:14px;
+  margin-bottom:10px;
+}
+
+.game-name{
+  font-size:17px;
+  font-weight:bold;
+}
+
+.card{
+  background:#121728;
+  border:1px solid #252c45;
+  border-radius:24px;
+  padding:20px;
+  margin-top:16px;
+}
+
+.packages{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.pack{
+  background:#0d1220;
+  border:2px solid #202740;
+  border-radius:18px;
+  padding:14px;
+  color:white;
+  cursor:pointer;
+  text-align:left;
+}
+
+.pack.active{
+  border-color:#27d7ff;
+  background:#111c2e;
+}
+
+.pack img{
+  width:55px;
+  height:55px;
+  object-fit:contain;
+  float:right;
+}
+
+.pack strong{
+  display:block;
+  font-size:17px;
+}
+
+.price{
+  color:#27d7ff;
+  font-weight:bold;
+  margin-top:7px;
+}
+
+label{
+  display:block;
+  margin:14px 0 7px;
+  color:#cbd3e5;
+  font-weight:bold;
+}
+
+input,select{
+  width:100%;
+  padding:15px;
+  border-radius:14px;
+  border:1px solid #303951;
+  background:#0b0f1a;
+  color:white;
+  font-size:16px;
+  outline:none;
+}
+
+input:focus,select:focus{
+  border-color:#27d7ff;
+}
+
+.order{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:16px;
+  margin-top:18px;
+  background:linear-gradient(90deg,#16b9e9,#596cff);
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.order:active{
+  transform:scale(.98);
+}
+
+#result{
+  display:none;
+  margin-top:18px;
+  padding:18px;
+  border-radius:18px;
+  background:#10263a;
+  border:1px solid #1e7797;
+  line-height:1.8;
+}
+
+.small{
+  color:#8995ad;
+  font-size:13px;
+}
+
+@media(max-width:600px){
+  .games,
+  .packages{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
-<div class="hero">
-<h1>🎮 E-KENZO TOP-UP</h1>
-<p>Top Up Game ងាយ • លឿន • សុវត្ថិភាព 🇰🇭</p>
-</div>
 
-<div class="card">
-<h2>🎮 ជ្រើសរើសហ្គេម</h2>
-<div class="games" id="games"></div>
-</div>
+  <div class="hero">
+    <h1>🎮 E-KENZO TOP-UP</h1>
+    <p>Top Up Game ងាយ • លឿន • សុវត្ថិភាព 🇰🇭</p>
+  </div>
 
-<div class="card">
-<h2>💎 ជ្រើសរើស Package</h2>
-<div class="packs" id="packs"></div>
-</div>
+  <div class="title">🎮 ជ្រើសរើសហ្គេម</div>
 
-<div class="card">
-<h2>👤 Player ID</h2>
-<input id="player" placeholder="បញ្ចូល Player ID">
-<input id="zone" placeholder="Zone ID (បើមាន)">
-</div>
+  <div class="games">
 
-<div class="card">
-<h2>💳 វិធីបង់ប្រាក់</h2>
-<div class="games">
-<button onclick="pay='KHQR'">KHQR</button>
-<button onclick="pay='ABA Pay'">ABA Pay</button>
-<button onclick="pay='Wing'">Wing</button>
-</div>
-</div>
+    <div class="game active" onclick="chooseGame('Free Fire',this)">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Garena%20Free%20Fire%20logo.svg" alt="Free Fire">
+      <div class="game-name">🔥 Free Fire</div>
+    </div>
 
-<div class="card">
-<p>Game: <b id="sg">-</b></p>
-<p>Package: <b id="sp">-</b></p>
-<p>Payment: <b id="sy">KHQR</b></p>
-<p>សរុប: <b id="price">0៛</b></p>
-<button onclick="order()">🛒 បញ្ជាទិញឥឡូវ</button>
-</div>
+    <div class="game" onclick="chooseGame('PUBG Mobile',this)">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/PUBG%20Mobile%20Logo.svg" alt="PUBG Mobile">
+      <div class="game-name">🔫 PUBG Mobile</div>
+    </div>
 
-<div id="result"></div>
+    <div class="game" onclick="chooseGame('Mobile Legends',this)">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mobile%20Legends%20Bang%20Bang%20logo.svg" alt="Mobile Legends">
+      <div class="game-name">⚔️ Mobile Legends</div>
+    </div>
+
+    <div class="game" onclick="chooseGame('Roblox',this)">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Roblox%20Logo.svg" alt="Roblox">
+      <div class="game-name">🎮 Roblox</div>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="title">💎 ជ្រើសរើស Package</div>
+
+    <div id="packages" class="packages"></div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="title">👤 Player ID</div>
+
+    <label>Player ID</label>
+    <input id="playerId" type="text" placeholder="បញ្ចូល Player ID">
+
+    <label>Zone ID <span class="small">(បើមាន)</span></label>
+    <input id="zoneId" type="text" placeholder="បញ្ចូល Zone ID">
+
+  </div>
+
+  <div class="card">
+
+    <div class="title">💳 ជ្រើសរើសការទូទាត់</div>
+
+    <select id="payment">
+      <option value="KHQR">🇰🇭 KHQR</option>
+      <option value="ABA">🏦 ABA</option>
+      <option value="Wing">💵 Wing</option>
+    </select>
+
+    <button class="order" onclick="orderNow()">
+      🛒 បញ្ជាទិញឥឡូវនេះ
+    </button>
+
+    <div id="result"></div>
+
+  </div>
+
 </div>
 
 <script>
-const data={
-"Free Fire":[["100 Diamonds",2500],["310 Diamonds",7000],["520 Diamonds",11000],["1060 Diamonds",22000]],
-"PUBG Mobile":[["60 UC",2500],["325 UC",12000],["660 UC",23000],["1800 UC",60000]],
-"Mobile Legends":[["86 Diamonds",3000],["172 Diamonds",6000],["257 Diamonds",9000],["706 Diamonds",24000]],
-"Roblox":[["80 Robux",3500],["400 Robux",15000],["800 Robux",29000],["1700 Robux",59000]]
+
+const data = {
+
+  "Free Fire":[
+    ["100 Diamonds","2,500៛"],
+    ["310 Diamonds","7,000៛"],
+    ["520 Diamonds","11,000៛"],
+    ["1060 Diamonds","22,000៛"]
+  ],
+
+  "PUBG Mobile":[
+    ["60 UC","2,500៛"],
+    ["325 UC","12,000៛"],
+    ["660 UC","23,000៛"],
+    ["1800 UC","60,000៛"]
+  ],
+
+  "Mobile Legends":[
+    ["86 Diamonds","3,000៛"],
+    ["172 Diamonds","6,000៛"],
+    ["257 Diamonds","9,000៛"],
+    ["706 Diamonds","24,000៛"]
+  ],
+
+  "Roblox":[
+    ["80 Robux","3,500៛"],
+    ["400 Robux","15,000៛"],
+    ["800 Robux","29,000៛"],
+    ["1700 Robux","59,000៛"]
+  ]
+
 };
-let game="Free Fire",pack=0,pay="KHQR";
-function money(n){return n.toLocaleString()+"៛"}
-function games(){
-document.getElementById("games").innerHTML=Object.keys(data).map(x=>
-`<button class="game ${x==game?"active":""}" onclick="game='${x}';pack=0;render()">🎮 ${x}</button>`).join("");
+
+let currentGame="Free Fire";
+let currentPackage="";
+
+function chooseGame(game,element){
+
+  currentGame=game;
+  currentPackage="";
+
+  document.querySelectorAll(".game").forEach(x=>{
+    x.classList.remove("active");
+  });
+
+  element.classList.add("active");
+
+  renderPackages();
 }
-function packs(){
-document.getElementById("packs").innerHTML=data[game].map((x,i)=>
-`<button class="pack ${i==pack?"active":""}" onclick="pack=${i};render()"><b>${x[0]}</b><div class="price">${money(x[1])}</div></button>`).join("");
+
+function renderPackages(){
+
+  const box=document.getElementById("packages");
+
+  box.innerHTML="";
+
+  data[currentGame].forEach((item,index)=>{
+
+    const div=document.createElement("div");
+
+    div.className="pack";
+
+    div.onclick=function(){
+
+      document.querySelectorAll(".pack").forEach(x=>{
+        x.classList.remove("active");
+      });
+
+      div.classList.add("active");
+
+      currentPackage=item[0]+" - "+item[1];
+    };
+
+    div.innerHTML=`
+      <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f48e.svg">
+      <strong>${item[0]}</strong>
+      <div class="price">${item[1]}</div>
+    `;
+
+    box.appendChild(div);
+
+  });
+
 }
-function render(){
-games();packs();
-document.getElementById("sg").textContent=game;
-document.getElementById("sp").textContent=data[game][pack][0];
-document.getElementById("price").textContent=money(data[game][pack][1]);
-document.getElementById("sy").textContent=pay;
+
+function orderNow(){
+
+  const player=document.getElementById("playerId").value.trim();
+  const zone=document.getElementById("zoneId").value.trim();
+  const payment=document.getElementById("payment").value;
+
+  if(!currentPackage){
+    alert("សូមជ្រើសរើស Package ជាមុនសិន!");
+    return;
+  }
+
+  if(!player){
+    alert("សូមបញ្ចូល Player ID!");
+    return;
+  }
+
+  const result=document.getElementById("result");
+
+  result.style.display="block";
+
+  result.innerHTML=`
+    <strong>✅ ព័ត៌មានការបញ្ជាទិញ</strong><br><br>
+    🎮 ហ្គេម: ${currentGame}<br>
+    💎 Package: ${currentPackage}<br>
+    👤 Player ID: ${player}<br>
+    🆔 Zone ID: ${zone || "មិនបានបញ្ចូល"}<br>
+    💳 Payment: ${payment}<br><br>
+    <span class="small">
+    សូមទាក់ទងអ្នកលក់ ដើម្បីបន្តការទូទាត់ និងបញ្ចូល Top-Up។
+    </span>
+  `;
+
 }
-function order(){
-let id=document.getElementById("player").value.trim();
-if(!id){alert("សូមបញ្ចូល Player ID ជាមុនសិន");return}
-let p=data[game][pack];
-document.getElementById("result").style.display="block";
-document.getElementById("result").innerHTML=
-"<h2>✅ Order បាន
+
+renderPackages();
+
+</script>
+
+</body>
+  </html>
