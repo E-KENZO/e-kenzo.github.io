@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>⚡ E-KENZO TOP UP</title>
+<style>
+:root{
+  --bg:#020c1a;
+  --panel:#061a34;
+  --panel2:#071f3e;
+  --line:#087cff;
+  --blue:#168bff;
+  --cyan:#5ecbff;
+  --green:#00e676;
+  --red:#ff2d55;
+  --muted:#9ab1ca;
+  --white:#f4f8ff;
+  --shadow:0 0 28px rgba(0,126,255,.20);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--white);
+  background:
+    radial-gradient(circle at 50% -10%,#06346b 0,rgba(3,24,50,.75) 22%,transparent 45%),
+    radial-gradient(circle at 50% 45%,rgba(0,110,255,.07),transparent 50%),
+    #020a15;
+  font-family:Arial,"Noto Sans Khmer","Khmer OS",sans-serif;
+}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+.container{width:min(1115px,94%);margin:auto}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(2,11,24,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid #0a4e91;
+  box-shadow:0 0 20px rgba(0,110,255,.18);
+}
+.nav{
+  height:68px;display:flex;align-items:center;gap:18px;
+}
+.header-logo{
+  width:225px;height:62px;object-fit:contain;object-position:left center;
+  flex:0 0 auto;
+}
+.navlinks{
+  display:flex;align-items:center;justify-content:center;gap:32px;
+  flex:1;font-weight:800;font-size:15px;color:#e9f3ff;
+}
+.navlinks a{padding:12px 8px;border-radius:12px;white-space:nowrap}
+.navlinks a:hover,.navlinks a.active{
+  color:#fff;text-shadow:0 0 10px #39a7ff;
+}
+.navlinks a.active{border-bottom:2px solid #23a2ff}
+.tg-top{
+  display:flex;align-items:center;gap:10px;
+  background:#082d58;border:1px solid #0c5da8;border-radius:30px;
+  padding:8px 14px;box-shadow:0 0 20px rgba(0,140,255,.18);
+  min-width:185px;
+}
+.tg-icon{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:#159be9;font-size:21px;
+}
+.tg-top b{font-size:13px}.tg-top small{display:block;color:#d6e8fb;font-size:10px;margin-top:2px}
+
+/* HERO */
+.hero{padding:10px 0 12px}
+.hero img{
+  display:block;width:100%;height:auto;border-radius:14px;
+  border:1px solid #0a6dcc;box-shadow:0 0 28px rgba(0,105,255,.28);
+}
+
+/* PACKAGES */
+.section{margin-top:10px}
+.card{
+  border:1px solid #0872d5;border-radius:17px;
+  background:linear-gradient(180deg,rgba(4,24,48,.96),rgba(3,15,31,.98));
+  box-shadow:var(--shadow);
+  padding:14px;
+}
+.section-head{
+  display:flex;align-items:center;gap:10px;margin-bottom:10px;
+}
+.section-icon{
+  width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#0c6dca,#06305f);
+  border:1px solid #168fff;box-shadow:0 0 18px rgba(0,144,255,.35);
+  font-size:22px;
+}
+.section-title{margin:0;font-size:18px}
+.package-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:12px;
+}
+.pkg{
+  position:relative;min-width:0;overflow:hidden;
+  border:1px solid #1a4c82;border-radius:13px;
+  background:linear-gradient(180deg,#061e3e,#05162d);
+  padding:8px 8px 9px;text-align:center;
+  cursor:pointer;transition:.18s;
+  box-shadow:inset 0 0 18px rgba(0,110,255,.08);
+}
+.pkg:hover{transform:translateY(-2px);border-color:#38a6ff}
+.pkg.selected{
+  border:2px solid #00f26a;
+  background:linear-gradient(180deg,#063c2b,#05271f);
+  box-shadow:0 0 20px rgba(0,255,111,.28),inset 0 0 18px rgba(0,255,111,.08);
+}
+.pkg.selected:after{
+  content:"✓";position:absolute;right:7px;top:6px;
+  width:23px;height:23px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;background:#18d9a0;font-weight:900;font-size:14px;
+}
+.pkg-img{
+  width:100%;height:93px;object-fit:contain;border-radius:10px;
+  display:block;margin:auto;background:#04172e;
+}
+.pkg-name{font-weight:900;font-size:14px;margin-top:5px;line-height:1.25}
+.pkg-price{font-weight:900;font-size:16px;color:#55bfff;margin-top:3px}
+.pkg-btn{
+  margin-top:7px;width:100%;border:0;border-radius:8px;
+  padding:8px 5px;background:linear-gradient(180deg,#117fff,#0d5bd4);
+  color:#fff;font-weight:900;font-size:12px;cursor:pointer;
+}
+.pkg.selected .pkg-btn{background:linear-gradient(180deg,#11d989,#079e68)}
+@media(max-width:1050px){.package-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){.package-grid{grid-template-columns:repeat(2,1fr)}.pkg-img{height:85px}}
+
+/* FOUR STEPS */
+.checkout-grid{
+  display:grid;grid-template-columns:1.1fr .9fr .9fr .9fr;gap:12px;
+  margin-top:12px;
+}
+.checkout-card{
+  min-width:0;border:1px solid #0869c8;border-radius:15px;
+  background:linear-gradient(180deg,#061d3b,#04152b);
+  padding:11px;box-shadow:0 0 22px rgba(0,115,255,.12);
+}
+.checkout-head{
+  display:flex;align-items:center;gap:8px;padding-bottom:7px;
+  border-bottom:1px solid #15528d;margin-bottom:9px;
+}
+.num{
+  width:34px;height:34px;flex:0 0 34px;border-radius:50%;
+  display:grid;place-items:center;background:#138dff;color:#fff;
+  font-size:18px;font-weight:900;box-shadow:0 0 14px #138dff88;
+}
+.checkout-head h3{font-size:15px;margin:0;line-height:1.2}
+.field{margin:8px 0}
+.field label{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:900;margin-bottom:5px}
+.field .ico{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#1597ef}
+input{
+  width:100%;height:36px;border-radius:9px;border:1px solid #123e69;
+  background:#041429;color:#fff;padding:0 10px;outline:none;font-size:11px;
+}
+input:focus{border-color:#1d9cff;box-shadow:0 0 0 2px #168bff22}
+.help{font-size:9px;color:#90a8c2;line-height:1.45;margin-top:5px}
+.lock-note{font-size:9px;color:#8ea9c6;margin:8px 0}
+.blue-btn{
+  width:100%;border:0;border-radius:8px;padding:10px 8px;
+  background:linear-gradient(180deg,#118cff,#0b61dc);color:#fff;font-weight:900;font-size:12px;cursor:pointer;
+  box-shadow:0 0 14px rgba(0,125,255,.22);
+}
+.blue-btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* PAYMENT */
+.pay-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.pay{
+  border:1px solid #164b7c;background:#062144;border-radius:8px;padding:8px 4px;
+  text-align:center;cursor:pointer;font-weight:900;font-size:11px;
+}
+.pay.khqr{background:#f22c49;border-color:#ff5270}
+.pay.aba{background:#0c5f9b}
+.pay.wing{background:#a9db18;color:#08220b}
+.pay small{display:block;font-size:8px;margin-top:2px}
+.amount{
+  margin-top:8px;border-radius:8px;background:#0a2d54;border:1px solid #145d99;
+  padding:8px;font-size:11px;color:#bcd6f0;
+}
+.amount b{font-size:15px;color:#fff}
+.qr-button{margin-top:8px}
+.qrbox{display:none;margin-top:8px;background:#fff;border-radius:10px;padding:7px}
+.qrbox img{display:block;width:100%;height:auto}
+
+/* STATUS */
+.status{
+  border:1px solid #ff3d6c;border-radius:10px;background:#230918;
+  padding:12px;text-align:center;
+}
+.status-icon{font-size:30px;color:#ff3d63}
+.status b{display:block;color:#ff7c9a;font-size:14px;margin-top:3px}
+.status small{display:block;color:#d8a5b2;font-size:9px;line-height:1.5;margin-top:4px}
+.refresh{
+  width:100%;border:0;border-radius:8px;background:#14365f;color:#d8ebff;
+  margin-top:9px;padding:9px;font-weight:900;font-size:11px;
+}
+.create{
+  width:100%;border:0;border-radius:8px;background:#66527b;color:#d7cee2;
+  margin-top:9px;padding:11px;font-weight:900;font-size:12px;
+}
+.lock-red{font-size:9px;color:#ff687f;text-align:center;margin-top:7px}
+
+/* ORDER */
+.order-row{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #14395f;padding:6px 0;font-size:10px}
+.order-row span{color:#9ab2cc}.order-row b{text-align:right}
+.order-status{display:inline-block;background:#ff2e55;color:#fff;border-radius:8px;padding:4px 6px;font-size:9px}
+.support{
+  margin-top:9px;background:#0b4f88;border-radius:10px;padding:8px;
+  display:flex;align-items:center;gap:8px;font-size:10px;font-weight:900;
+}
+.support .tg-icon{width:28px;height:28px;font-size:15px}
+
+/* FOOTER */
+footer{
+  position:relative;margin-top:9px;padding:7px 0 14px;
+  border-top:1px solid #0b6ec6;
+}
+.footer-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;gap:20px;
+}
+.footer-mascot{width:170px;max-width:100%;display:block}
+.footer-logo{width:170px;max-width:100%;display:block;margin:auto}
+.footer-points{display:flex;justify-content:flex-end;gap:20px;font-size:10px;color:#d7e8fa}
+.footer-point{display:flex;align-items:center;gap:5px}
+.copy{text-align:center;color:#8da3bd;font-size:9px;margin-top:-2px}
+.social{text-align:right;font-size:16px;margin-top:-2px}
+@media(max-width:850px){
+  .nav{height:60px}.header-logo{width:180px}
+  .navlinks{gap:12px;font-size:12px}.tg-top{min-width:auto;padding:6px 8px}.tg-top small{display:none}
+  .checkout-grid{grid-template-columns:1fr 1fr}
+  .footer-row{grid-template-columns:1fr 1fr}
+  .footer-points{justify-content:flex-start}
+}
+@media(max-width:620px){
+  .container{width:96%}
+  .navlinks a:nth-child(3){display:none}
+  .header-logo{width:145px}
+  .tg-top{display:none}
+  .navlinks{justify-content:flex-end;gap:5px;font-size:10px}
+  .hero{padding-top:7px}
+  .checkout-grid{grid-template-columns:1fr}
+  .checkout-card{padding:12px}
+  .footer-row{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .footer-points{justify-content:center;flex-wrap:wrap}
+  .social{text-align:center}
+  .footer-mascot{width:145px}.footer-logo{width:150px}
+}
+
+/* COMPACT MOBILE-FIRST CHECKOUT FLOW */
+body{font-size:13px}
+.container{width:min(920px,94%)}
+.nav{height:56px;gap:10px}
+.header-logo{width:185px;height:52px}
+.navlinks{gap:18px;font-size:12px}
+.tg-top{min-width:155px;padding:6px 9px}.tg-icon{width:32px;height:32px;font-size:18px}.tg-top b{font-size:11px}.tg-top small{font-size:8px}
+.hero{padding:7px 0 9px}.hero img{border-radius:11px}
+.section{margin-top:8px}.card{padding:10px;border-radius:13px}.section-head{margin-bottom:7px}.section-icon{width:34px;height:34px;border-radius:10px;font-size:18px}.section-title{font-size:15px}
+.package-grid{gap:7px}.pkg{padding:6px 6px 7px;border-radius:10px}.pkg-img{height:70px;border-radius:8px}.pkg-name{font-size:11px}.pkg-price{font-size:13px}.pkg-btn{margin-top:5px;padding:6px 4px;font-size:10px;border-radius:7px}
+.checkout-grid{gap:8px;margin-top:8px}.checkout-card{padding:9px;border-radius:11px}.checkout-head{gap:6px;padding-bottom:5px;margin-bottom:7px}.num{width:28px;height:28px;flex-basis:28px;font-size:14px}.checkout-head h3{font-size:12px}.field{margin:6px 0}.field label{font-size:10px}.field .ico{width:22px;height:22px}input{height:33px;font-size:10px}.help,.lock-note{font-size:8px}.blue-btn{padding:8px;font-size:10px}.pay{padding:6px 3px;font-size:10px}.amount{padding:6px;font-size:10px}.amount b{font-size:13px}.qrbox{padding:6px}.status{padding:9px}.status-icon{font-size:24px}.status b{font-size:12px}.status small{font-size:8px}.refresh,.create{padding:8px;font-size:10px}.order-row{font-size:9px;padding:5px 0}.support{font-size:9px;padding:7px}.footer-mascot,.footer-logo{width:125px}.footer-points{font-size:8px;gap:10px}.copy{font-size:8px}
+.flow-hidden{display:none!important}.flow-visible{display:block!important;animation:flowIn .25s ease}
+@keyframes flowIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.complete{display:none;margin-top:8px;padding:12px;border:1px solid #19e38a;border-radius:11px;background:linear-gradient(180deg,#062d21,#031b15);text-align:center;box-shadow:0 0 18px rgba(0,255,150,.12)}
+.complete.show{display:block;animation:flowIn .25s ease}.complete .ok{font-size:28px}.complete h3{margin:4px 0;font-size:15px;color:#7fffb1}.complete p{margin:0;color:#b9d8ca;font-size:9px;line-height:1.5}.complete .pending{display:inline-block;margin-top:7px;padding:5px 8px;border-radius:999px;background:#4b2d0c;color:#ffd58a;font-size:9px;font-weight:900}
+.done-btn{width:100%;margin-top:8px;border:0;border-radius:8px;padding:9px;background:linear-gradient(180deg,#14d98b,#079b65);color:#fff;font-weight:900;font-size:11px;cursor:pointer}.done-btn:disabled{opacity:.5}
+
+.receipt-box{margin-top:8px;padding:8px;border:1px solid #1b5c91;border-radius:9px;background:#061b31}.receipt-label{display:block;color:#d7ecff;font-size:9px;font-weight:800;margin-bottom:6px}.receipt-input{width:100%;height:auto;padding:6px;background:#081525;border:1px dashed #267cc0;color:#9ec7e8;border-radius:7px;font-size:9px}.receipt-preview{margin-top:7px;text-align:center}.receipt-preview img{max-width:150px;max-height:150px;border-radius:8px;border:1px solid #1fd39a;object-fit:contain}.receipt-msg{margin-top:5px;font-size:8px;color:#ffcf70}.receipt-msg.ok{color:#6fffc0}.done-btn:disabled{cursor:not-allowed;opacity:.45}
+.brand-name{font-weight:1000;font-size:14px;letter-spacing:.4px;color:#fff;margin-left:-2px}.brand-name span{color:#35a8ff}
+@media(max-width:620px){.container{width:94%}.header-logo{width:140px;height:48px}.navlinks{gap:3px;font-size:9px}.navlinks a{padding:8px 4px}.package-grid{gap:5px}.pkg-img{height:62px}.pkg-name{font-size:10px}.pkg-price{font-size:12px}.pkg-btn{font-size:9px}.checkout-grid{grid-template-columns:1fr}}
+
+
+/* FINAL COMPACT SEQUENTIAL FLOW */
+.container{width:min(820px,92%)}
+body{font-size:12px}
+.hero{padding:7px 0 8px;position:relative}
+.hero img{border-radius:11px;max-height:210px;object-fit:cover}
+.hero-title{margin-top:7px;text-align:center;font-size:20px;font-weight:1000;letter-spacing:.4px;text-shadow:0 0 12px #138dff}
+.hero-sub{text-align:center;color:#8fd4ff;font-size:9px;margin-top:2px}
+.section{margin-top:7px}
+.card,.checkout-card{padding:9px;border-radius:12px}
+.section-head{gap:7px;margin-bottom:7px}.section-icon{width:31px;height:31px;border-radius:9px;font-size:16px}.section-title{font-size:14px}.tiny{font-size:8px;color:#8aa9c4;margin-top:1px}
+.package-grid{grid-template-columns:repeat(3,1fr);gap:6px}
+.pkg{padding:5px 5px 6px;border-radius:9px}.pkg-img{height:62px;border-radius:7px}.pkg-name{font-size:10px;margin-top:4px}.pkg-price{font-size:12px;margin-top:2px}.pkg-btn{font-size:9px;margin-top:5px;padding:6px 3px;border-radius:7px}.pkg.selected:after{width:18px;height:18px;font-size:11px;right:5px;top:5px}
+.checkout-grid{display:block;margin-top:0}.checkout-card{margin-top:7px}.checkout-head{gap:6px;padding-bottom:5px;margin-bottom:7px}.num{width:27px;height:27px;flex-basis:27px;font-size:13px}.checkout-head h3{font-size:12px}
+.field{margin:6px 0}.field label{font-size:9px;margin-bottom:4px}.field .ico{width:21px;height:21px;font-size:10px}input{height:32px;font-size:10px;border-radius:8px}.lock-note,.help{font-size:8px}.blue-btn,.done-btn,.secondary-btn{font-size:10px;padding:8px;border-radius:8px}
+.selected-package{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:7px 8px;margin-bottom:7px;background:#072b50;border:1px solid #1b78c9;border-radius:8px;font-size:8px}.selected-package span{color:#7fffb1}.selected-package b{font-size:10px}.selected-package strong{color:#63caff;font-size:11px}
+.payment-summary{display:grid;grid-template-columns:1fr auto;gap:3px 8px;padding:7px 8px;background:#08284a;border:1px solid #165a91;border-radius:8px;font-size:8px;color:#95b5d1}.payment-summary b{font-size:10px;color:#fff}.payment-summary strong{font-size:14px;color:#7fffb1;text-align:right}.khqr-label{text-align:center;font-size:11px;font-weight:900;color:#fff;margin-top:7px}.qrbox{display:block;margin:7px auto 0;width:min(190px,72%);padding:6px;border-radius:9px}.qrbox img{width:100%;height:auto;display:block}.pay-note{font-size:8px;line-height:1.45;color:#8da8c1;text-align:center;margin-top:6px}.status{padding:10px;border-radius:9px}.status-icon{font-size:26px;color:#47f2a1}.status b{font-size:12px;color:#7fffb1;margin-top:1px}.status small{font-size:8px}.pending-chip{display:block;width:max-content;max-width:100%;margin:7px auto 0;padding:5px 8px;border-radius:999px;background:#4a340f;color:#ffd98a;font-size:8px;font-weight:900}.secondary-btn{margin-top:8px}
+.order-row{font-size:8px;padding:5px 0}.order-status{font-size:8px;padding:3px 5px}.support{margin-top:7px;padding:6px;font-size:8px}.support .tg-icon{width:25px;height:25px;font-size:13px}.complete{margin-top:7px;padding:9px}.complete .ok{font-size:23px}.complete h3{font-size:12px}.complete p{font-size:8px}.flow-hidden{display:none!important}.flow-visible{display:block!important;animation:flowIn .2s ease}.hero+section{margin-top:7px}
+@media(max-width:620px){.container{width:92%}.hero img{max-height:160px}.hero-title{font-size:17px}.package-grid{grid-template-columns:repeat(2,1fr);gap:5px}.pkg-img{height:58px}.pkg-name{font-size:9px}.pkg-price{font-size:11px}.pkg-btn{font-size:8px;padding:5px 2px}.qrbox{width:min(170px,66vw)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#home"><img class="header-logo" src="img-283ca65c649c.png" alt="E-KENZO Roblox Top Up"></a>
+    <nav class="navlinks">
+      <a class="active" href="#home">⌂ &nbsp;Home</a>
+      <a href="#topup">◈ &nbsp;Top Up</a>
+      <a href="#guide">▤ &nbsp;Guide</a>
+      <a href="#contact">❤ &nbsp;Contact</a>
+    </nav>
+    <a class="tg-top" href="https://t.me/E-KENZO-SHOP_Bot" target="_blank">
+      <span class="tg-icon">➤</span>
+      <span><b>Telegram</b><small>@E-KENZO-SHOP_Bot</small></span>
+    </a>
+  </div>
+</header>
+
+<main id="home" class="container">
+  <section class="hero">
+    <img src="img-1a4084d70a86.png" alt="E-KENZO Roblox Top Up">
+    <div class="hero-title">⚡ E-KENZO TOP UP</div>
+    <div class="hero-sub">Roblox Top-Up • Fast • Simple • Secure</div>
+  </section>
+
+  <section id="topup" class="section">
+    <div class="card">
+      <div class="section-head">
+        <div class="section-icon">💎</div>
+        <div>
+          <h2 class="section-title">Robux Packages</h2>
+          <div class="tiny">ជ្រើសរើស Package មួយ ដើម្បីបន្ត</div>
+        </div>
+      </div>
+      <div id="packages" class="package-grid"></div>
+    </div>
+  </section>
+
+  <section id="guide" class="section">
+    <div id="accountCard" class="checkout-card flow-step flow-hidden">
+      <div class="checkout-head"><span class="num">1</span><h3>ព័ត៌មានគណនី</h3></div>
+      <div id="selectedPackage" class="selected-package"></div>
+      <div class="field">
+        <label><span class="ico">👤</span>Roblox Username</label>
+        <input id="roblox" maxlength="32" autocomplete="off" placeholder="ឧ. YourName123">
+      </div>
+      <div class="field">
+        <label><span class="ico">➤</span>Telegram Username</label>
+        <input id="telegram" maxlength="64" autocomplete="off" placeholder="ឧ. @username">
+      </div>
+      <div class="lock-note">🔒 មិនត្រូវការ Roblox Password ឬ Backup Code ទេ</div>
+      <button class="blue-btn" type="button" onclick="continueToPayment()">បន្តទៅ QR →</button>
+      <div id="formMsg" class="help"></div>
+    </div>
+
+    <div id="paymentCard" class="checkout-card flow-step flow-hidden">
+      <div class="checkout-head"><span class="num">2</span><h3>បង់ប្រាក់តាម KHQR</h3></div>
+      <div class="payment-summary">
+        <span>Package</span><b id="payPackage">-</b>
+        <span>ចំនួនត្រូវបង់</span><strong id="amount">$0.00</strong>
+      </div>
+      <div class="khqr-label">📱 Scan. Pay. Done</div>
+      <div id="qrbox" class="qrbox"><img id="qr" alt="KHQR Payment QR"></div>
+      <div class="pay-note">សូមបង់ចំនួនឲ្យត្រូវតាម Amount ខាងលើ ហើយពិនិត្យឈ្មោះអ្នកទទួលក្នុង Banking App មុន Confirm.</div>
+      <div class="receipt-box">
+        <label class="receipt-label" for="receiptInput">🧾 បន្ទាប់ពីផេរលុយ សូមជ្រើសរើសកុង/វិក្កយបត្ររបស់អ្នក</label>
+        <input id="receiptInput" class="receipt-input" type="file" accept="image/*" />
+        <div id="receiptPreview" class="receipt-preview flow-hidden"></div>
+        <div id="receiptMsg" class="receipt-msg">⚠️ ត្រូវដាក់កុងទើបអាចបន្តបាន</div>
+      </div>
+      <button id="doneBtn" class="done-btn" type="button" onclick="finishPayment()" disabled>✓ បង់រួចរាល់ • បញ្ជូនកុង</button>
+    </div>
+
+    <div id="statusCard" class="checkout-card flow-step flow-hidden">
+      <div class="checkout-head"><span class="num">3</span><h3>បានទទួលសំណើ</h3></div>
+      <div class="status success-ish">
+        <div class="status-icon">✓</div>
+        <b id="statusText">បានដាក់សំណើរួច</b>
+        <small id="paymentText">រង់ចាំ Admin ពិនិត្យ Transaction និងបញ្ជាក់ PAID។</small>
+      </div>
+      <div class="pending-chip">⏳ PENDING ADMIN CONFIRM</div>
+      <button class="blue-btn secondary-btn" type="button" onclick="goToOrder()">មើលព័ត៌មានបញ្ជាទិញ →</button>
+    </div>
+
+    <div id="orderCard" class="checkout-card flow-step flow-hidden">
+      <div class="checkout-head"><span class="num">4</span><h3>ព័ត៌មានការបញ្ជាទិញ</h3></div>
+      <div class="order-row"><span>Order ID</span><b id="orderId">#EK-000000</b></div>
+      <div class="order-row"><span>Package</span><b id="oPackage">-</b></div>
+      <div class="order-row"><span>Amount</span><b id="oPrice">$0.00</b></div>
+      <div class="order-row"><span>Roblox</span><b id="oRoblox">-</b></div>
+      <div class="order-row"><span>Telegram</span><b id="oTelegram">-</b></div>
+      <div class="order-row"><span>Payment</span><b>KHQR</b></div>
+      <div class="order-row"><span>Status</span><b><span class="order-status">មិនទាន់ PAID</span></b></div>
+      <a class="support" href="https://t.me/E-KENZO-SHOP_Bot" target="_blank" rel="noopener">
+        <span class="tg-icon">➤</span>
+        <span>ទាក់ទង Support<br>@E-KENZO-SHOP_Bot</span>
+      </a>
+      <div id="completeBox" class="complete show">
+        <div class="ok">✅</div>
+        <h3>E-KENZO TOP UP</h3>
+        <p>ការបញ្ជាទិញរបស់អ្នកបានទទួល។ សូមរង់ចាំ Admin ពិនិត្យការទូទាត់ និង Confirm PAID។</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <img class="footer-mascot" src="img-11c3574d2329.png" alt="Gojo Mini">
+      <img class="footer-logo" src="img-a0e23eb1e16d.png" alt="E-KENZO">
+      <div class="footer-points">
+        <span class="footer-point">🛡️ សុវត្ថិភាព 100%</span>
+        <span class="footer-point">⚡ រហ័សរហួន</span>
+        <span class="footer-point">🎧 Support 24/7</span>
+      </div>
+    </div>
+    <div class="copy">© 2025 E-KENZO. All rights reserved.</div>
+    <div class="social">➤ &nbsp;♪ &nbsp;▶</div>
+  </div>
+</footer>
+
+<script>
+const packages = [
+  ["img-1f424046570c.png","80 Robux",1.25],
+  ["img-a7fe4404def9.png","160 Robux",2.50],
+  ["img-d16cf5c060db.png","500 Robux",6.00],
+  ["img-15dbd002e540.png","1000 Robux",10.00],
+  ["img-8f46ec6bc858.png","2000 Robux",19.00],
+  ["img-e1c9f8e65502.png","Roblox Plus<br>3 Months",14.50]
+];
+let selected = packages[0];
+let preOrder = null;
+const qrData = "img-7bb688b198b7.jpg";
+
+document.getElementById("qr").src = qrData;
+
+function money(n){ return "$" + Number(n).toFixed(2); }
+function cleanName(name){ return String(name).replace("<br>"," "); }
+function scrollToEl(id){
+  const el=document.getElementById(id);
+  if(!el) return;
+  setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),80);
+}
+function showOnly(id){
+  document.querySelectorAll('.flow-step').forEach(el=>el.classList.add('flow-hidden'));
+  const el=document.getElementById(id);
+  if(el){
+    el.classList.remove('flow-hidden');
+    el.classList.add('flow-visible');
+  }
+  scrollToEl(id);
+}
+function selectPackage(p, card){
+  selected=p;
+  document.querySelectorAll('.pkg').forEach(x=>x.classList.remove('selected'));
+  card.classList.add('selected');
+  const name=cleanName(p[1]);
+  document.getElementById('selectedPackage').innerHTML=`<span>✓ បានជ្រើសរើស</span><b>${name}</b><strong>${money(p[2])}</strong>`;
+  document.getElementById('formMsg').textContent='';
+  showOnly('accountCard');
+}
+function renderPackages(){
+  const box=document.getElementById('packages');
+  box.innerHTML='';
+  packages.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='pkg';
+    card.innerHTML=`<img class="pkg-img" src="${p[0]}" alt="${cleanName(p[1])}"><div class="pkg-name">${cleanName(p[1])}</div><div class="pkg-price">${money(p[2])}</div><button class="pkg-btn" type="button">🛒 ជ្រើសរើស</button>`;
+    card.addEventListener('click',()=>selectPackage(p,card));
+    box.appendChild(card);
+  });
+}
+function continueToPayment(){
+  const roblox=document.getElementById('roblox').value.trim();
+  const telegram=document.getElementById('telegram').value.trim();
+  const msg=document.getElementById('formMsg');
+  if(!roblox || !telegram){
+    msg.style.color='#ff8197';
+    msg.textContent='សូមបំពេញ Roblox Username និង Telegram Username ជាមុនសិន។';
+    return;
+  }
+  preOrder={package:cleanName(selected[1]),price:selected[2],roblox,telegram};
+  document.getElementById('payPackage').textContent=preOrder.package;
+  document.getElementById('amount').textContent=money(preOrder.price);
+  document.getElementById('statusCard').classList.add('flow-hidden');
+  document.getElementById('orderCard').classList.add('flow-hidden');
+  document.getElementById('doneBtn').disabled=false;
+  showOnly('paymentCard');
+}
+function finishPayment(){
+  if(!preOrder) return;
+  const receipt=document.getElementById('receiptInput');
+  if(!receipt || !receipt.files || !receipt.files.length){
+    const rm=document.getElementById('receiptMsg');
+    rm.textContent='⚠️ សូមជ្រើសរើសកុង/វិក្កយបត្របង់ប្រាក់ជាមុនសិន។';
+    rm.classList.remove('ok');
+    return;
+  }
+  const stamp=new Date().toISOString().slice(0,10).replace(/-/g,'');
+  const orderId='EK'+stamp+'-'+Math.floor(100+Math.random()*900);
+  document.getElementById('orderId').textContent='#'+orderId;
+  document.getElementById('oPackage').textContent=preOrder.package;
+  document.getElementById('oPrice').textContent=money(preOrder.price);
+  document.getElementById('oRoblox').textContent=preOrder.roblox;
+  document.getElementById('oTelegram').textContent=preOrder.telegram;
+  document.getElementById('statusText').textContent='បានដាក់សំណើរួច ✓';
+  document.getElementById('paymentText').textContent='Admin នឹងពិនិត្យ Transaction មុនបញ្ជាក់ PAID។';
+  document.getElementById('doneBtn').disabled=true;
+  showOnly('statusCard');
+}
+function goToOrder(){
+  if(!preOrder) return;
+  showOnly('orderCard');
+}
+
+document.getElementById('receiptInput')?.addEventListener('change', function(){
+  const file=this.files && this.files[0];
+  const btn=document.getElementById('doneBtn');
+  const preview=document.getElementById('receiptPreview');
+  const msg=document.getElementById('receiptMsg');
+  preview.innerHTML='';
+  if(!file){
+    btn.disabled=true;
+    preview.classList.add('flow-hidden');
+    msg.textContent='⚠️ ត្រូវដាក់កុងទើបអាចបន្តបាន';
+    msg.classList.remove('ok');
+    return;
+  }
+  if(!file.type.startsWith('image/')){
+    btn.disabled=true;
+    msg.textContent='⚠️ សូមជ្រើសរើសរូបកុង/វិក្កយបត្រ (JPG, PNG...)';
+    msg.classList.remove('ok');
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=document.createElement('img');
+    img.src=e.target.result;
+    img.alt='Payment receipt preview';
+    preview.appendChild(img);
+    preview.classList.remove('flow-hidden');
+  };
+  reader.readAsDataURL(file);
+  btn.disabled=false;
+  msg.textContent='✓ បានជ្រើសរើសកុងរួច — អាចបន្តបាន';
+  msg.classList.add('ok');
+});
+renderPackages();
+</script>
+</body>
+</html>
