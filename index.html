@@ -2,201 +2,825 @@
 <html lang="km">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E-KENZO TOP-UP</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>E-KENZO | Roblox Top Up</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#050b18;
+  --bg2:#07152b;
+  --card:#0a1930;
+  --card2:#0d203b;
+  --blue:#19aaff;
+  --cyan:#49ddff;
+  --blue2:#126cff;
+  --white:#f4f9ff;
+  --muted:#91a8c3;
+  --green:#18df8b;
+  --red:#ff496c;
+  --gold:#ffd45a;
+  --line:rgba(72,177,255,.18);
+}
 
 body{
-  margin:0;
   font-family:Arial,"Noto Sans Khmer",sans-serif;
-  background:#080b14;
-  color:white;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(0,145,255,.20),transparent 30%),
+    radial-gradient(circle at 85% 20%,rgba(0,210,255,.12),transparent 25%),
+    linear-gradient(135deg,#030812,#07172e 55%,#030916);
+  color:var(--white);
+  min-height:100vh;
 }
 
-.wrap{
-  max-width:900px;
+/* ===== NAVBAR ===== */
+
+.nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(3,10,23,.86);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav-inner{
+  max-width:1250px;
   margin:auto;
-  padding:18px;
+  min-height:70px;
+  padding:10px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
 }
 
-.hero{
-  background:linear-gradient(135deg,#171b2d,#101426);
-  border:1px solid #292f48;
-  border-radius:28px;
-  padding:28px 22px;
-  margin-bottom:18px;
-  box-shadow:0 10px 30px #0008;
+.logo{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-weight:900;
+  font-size:22px;
+  letter-spacing:.5px;
 }
 
-.hero h1{
-  margin:0;
-  font-size:34px;
-  line-height:1.2;
-}
-
-.hero p{
-  color:#aeb7cc;
-  font-size:16px;
-  margin-bottom:0;
-}
-
-.title{
-  font-size:23px;
-  font-weight:bold;
-  margin:24px 0 12px;
-}
-
-.games{
+.logo-icon{
+  width:43px;
+  height:43px;
+  border-radius:13px;
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  place-items:center;
+  background:linear-gradient(135deg,#168cff,#55e6ff);
+  color:#001325;
+  box-shadow:0 0 25px rgba(31,178,255,.55);
+  font-size:22px;
 }
 
-.game{
-  background:#121728;
-  border:2px solid #202740;
-  border-radius:20px;
-  padding:14px;
+.logo span{
+  color:var(--cyan);
+}
+
+.nav-links{
+  display:flex;
+  gap:26px;
+  align-items:center;
+}
+
+.nav-links a{
+  color:#b8cbe0;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+}
+
+.nav-links a:hover{
+  color:#fff;
+}
+
+.tg-btn{
+  text-decoration:none;
   color:white;
-  text-align:left;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.game:hover{
-  transform:translateY(-2px);
-}
-
-.game.active{
-  border-color:#27d7ff;
-  box-shadow:0 0 15px #27d7ff33;
-}
-
-.game img{
-  width:100%;
-  height:120px;
-  object-fit:contain;
-  background:#0c101d;
-  border-radius:14px;
-  margin-bottom:10px;
-}
-
-.game-name{
-  font-size:17px;
-  font-weight:bold;
-}
-
-.card{
-  background:#121728;
-  border:1px solid #252c45;
-  border-radius:24px;
-  padding:20px;
-  margin-top:16px;
-}
-
-.packages{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.pack{
-  background:#0d1220;
-  border:2px solid #202740;
-  border-radius:18px;
-  padding:14px;
-  color:white;
-  cursor:pointer;
-  text-align:left;
-}
-
-.pack.active{
-  border-color:#27d7ff;
-  background:#111c2e;
-}
-
-.pack img{
-  width:55px;
-  height:55px;
-  object-fit:contain;
-  float:right;
-}
-
-.pack strong{
-  display:block;
-  font-size:17px;
-}
-
-.price{
-  color:#27d7ff;
-  font-weight:bold;
-  margin-top:7px;
-}
-
-label{
-  display:block;
-  margin:14px 0 7px;
-  color:#cbd3e5;
-  font-weight:bold;
-}
-
-input,select{
-  width:100%;
-  padding:15px;
-  border-radius:14px;
-  border:1px solid #303951;
-  background:#0b0f1a;
-  color:white;
-  font-size:16px;
-  outline:none;
-}
-
-input:focus,select:focus{
-  border-color:#27d7ff;
-}
-
-.order{
-  width:100%;
-  border:0;
-  border-radius:15px;
-  padding:16px;
-  margin-top:18px;
-  background:linear-gradient(90deg,#16b9e9,#596cff);
-  color:white;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.order:active{
-  transform:scale(.98);
-}
-
-#result{
-  display:none;
-  margin-top:18px;
-  padding:18px;
-  border-radius:18px;
-  background:#10263a;
-  border:1px solid #1e7797;
-  line-height:1.8;
-}
-
-.small{
-  color:#8995ad;
+  padding:11px 17px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#168cff,#0861df);
+  box-shadow:0 0 20px rgba(0,136,255,.3);
+  font-weight:800;
   font-size:13px;
 }
 
-@media(max-width:600px){
-  .games,
-  .packages{
+/* ===== MAIN ===== */
+
+.container{
+  max-width:1250px;
+  margin:auto;
+  padding:25px 20px 60px;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:235px;
+  border:1px solid rgba(67,190,255,.23);
+  border-radius:25px;
+  padding:35px;
+  background:
+    radial-gradient(circle at 85% 50%,rgba(0,204,255,.20),transparent 28%),
+    linear-gradient(115deg,#081b36,#061226 65%,#09234a);
+  box-shadow:0 15px 60px rgba(0,0,0,.28);
+  display:flex;
+  align-items:center;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  right:-80px;
+  top:-100px;
+  border-radius:50%;
+  border:1px solid rgba(53,198,255,.2);
+  box-shadow:
+    0 0 0 35px rgba(40,172,255,.04),
+    0 0 0 70px rgba(40,172,255,.025);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:700px;
+}
+
+.badge{
+  display:inline-flex;
+  padding:7px 12px;
+  border-radius:99px;
+  background:rgba(21,151,255,.12);
+  border:1px solid rgba(55,195,255,.3);
+  color:#65ddff;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:15px;
+}
+
+.hero h1{
+  font-size:clamp(32px,5vw,57px);
+  line-height:1;
+  font-weight:1000;
+  letter-spacing:-2px;
+}
+
+.hero h1 span{
+  color:var(--cyan);
+  text-shadow:0 0 28px rgba(41,210,255,.5);
+}
+
+.hero p{
+  margin-top:13px;
+  color:#9db5cf;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.gojo-mini{
+  position:absolute;
+  right:55px;
+  bottom:-25px;
+  width:160px;
+  height:190px;
+  z-index:2;
+  opacity:.9;
+}
+
+.gojo-head{
+  width:125px;
+  height:125px;
+  margin:auto;
+  border-radius:48% 48% 45% 45%;
+  background:linear-gradient(145deg,#fff,#bde8ff);
+  border:3px solid #7cddff;
+  box-shadow:0 0 35px rgba(54,201,255,.35);
+  position:relative;
+}
+
+.gojo-hair{
+  position:absolute;
+  left:8px;
+  top:-17px;
+  width:109px;
+  height:58px;
+  background:#e8f8ff;
+  clip-path:polygon(
+    0 45%,10% 15%,22% 40%,34% 5%,47% 39%,
+    60% 0,70% 37%,84% 8%,100% 44%,88% 75%,10% 75%
+  );
+}
+
+.eye{
+  position:absolute;
+  top:60px;
+  width:24px;
+  height:8px;
+  border-radius:50%;
+  background:#168cff;
+  box-shadow:0 0 12px #36d7ff;
+}
+
+.eye.left{left:27px}
+.eye.right{right:27px}
+
+.gojo-body{
+  width:145px;
+  height:90px;
+  margin:-8px auto 0;
+  border-radius:35px 35px 15px 15px;
+  background:linear-gradient(135deg,#101d35,#07101e);
+  border:2px solid rgba(81,203,255,.25);
+}
+
+/* ===== CONTENT GRID ===== */
+
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 335px;
+  gap:20px;
+  margin-top:22px;
+}
+
+.section{
+  background:rgba(7,20,39,.8);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 12px 40px rgba(0,0,0,.18);
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:17px;
+}
+
+.section-title h2{
+  font-size:18px;
+}
+
+.section-title p{
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* ===== PACKAGES ===== */
+
+.packages{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.package{
+  position:relative;
+  cursor:pointer;
+  padding:17px 14px;
+  min-height:130px;
+  border-radius:16px;
+  background:linear-gradient(145deg,#0b203c,#07152a);
+  border:1px solid rgba(69,166,255,.17);
+  transition:.2s ease;
+  overflow:hidden;
+}
+
+.package:hover{
+  transform:translateY(-3px);
+  border-color:rgba(63,201,255,.55);
+}
+
+.package.selected{
+  border:2px solid var(--cyan);
+  background:linear-gradient(145deg,#0c294a,#071a32);
+  box-shadow:
+    0 0 0 3px rgba(40,207,255,.08),
+    0 0 28px rgba(19,176,255,.18);
+}
+
+.check{
+  display:none;
+  position:absolute;
+  right:9px;
+  top:9px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--cyan);
+  color:#00101d;
+  font-size:13px;
+  font-weight:1000;
+  align-items:center;
+  justify-content:center;
+}
+
+.package.selected .check{
+  display:flex;
+}
+
+.package-icon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:rgba(31,156,255,.12);
+  border:1px solid rgba(72,194,255,.18);
+  margin-bottom:11px;
+  font-size:21px;
+}
+
+.package h3{
+  font-size:15px;
+  margin-bottom:4px;
+}
+
+.package .robux{
+  color:#6cddff;
+  font-size:12px;
+  font-weight:800;
+}
+
+.price{
+  margin-top:10px;
+  color:white;
+  font-size:19px;
+  font-weight:1000;
+}
+
+.price small{
+  color:#8199b4;
+  font-size:10px;
+  font-weight:500;
+}
+
+.plus-card{
+  background:
+    radial-gradient(circle at 100% 0%,rgba(255,208,77,.12),transparent 40%),
+    linear-gradient(145deg,#1d1a0d,#11182b);
+}
+
+.plus-card .package-icon{
+  color:var(--gold);
+}
+
+/* ===== INPUT ===== */
+
+.form{
+  margin-top:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:7px;
+  font-size:12px;
+  font-weight:800;
+  color:#b9cde2;
+}
+
+.input{
+  width:100%;
+  border:1px solid rgba(83,164,235,.2);
+  outline:none;
+  color:white;
+  background:#061226;
+  border-radius:12px;
+  padding:13px 14px;
+  font-size:13px;
+}
+
+.input:focus{
+  border-color:#2bc9ff;
+  box-shadow:0 0 0 3px rgba(43,201,255,.08);
+}
+
+.input::placeholder{
+  color:#50677f;
+}
+
+/* ===== PAYMENT ===== */
+
+.payment-methods{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:10px;
+}
+
+.pay{
+  cursor:pointer;
+  border:1px solid rgba(77,174,255,.2);
+  background:#07162b;
+  border-radius:13px;
+  padding:14px 8px;
+  text-align:center;
+  color:#b6c8db;
+  font-weight:900;
+  font-size:12px;
+}
+
+.pay strong{
+  display:block;
+  color:white;
+  font-size:15px;
+  margin-bottom:4px;
+}
+
+.pay.selected{
+  border-color:var(--cyan);
+  background:rgba(22,153,255,.1);
+  box-shadow:0 0 20px rgba(0,175,255,.12);
+}
+
+/* ===== RIGHT SIDE ===== */
+
+.sidebar{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.summary{
+  background:
+    linear-gradient(145deg,rgba(12,39,71,.92),rgba(6,17,33,.95));
+}
+
+.order-id{
+  padding:10px 12px;
+  border-radius:10px;
+  background:rgba(0,0,0,.22);
+  color:#6ddfff;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:15px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:10px 0;
+  border-bottom:1px solid rgba(100,170,220,.09);
+  font-size:12px;
+}
+
+.summary-row span:first-child{
+  color:#7891aa;
+}
+
+.summary-row span:last-child{
+  color:white;
+  font-weight:800;
+  text-align:right;
+}
+
+.total{
+  margin-top:13px;
+  padding:14px;
+  border-radius:13px;
+  background:rgba(26,171,255,.08);
+  border:1px solid rgba(48,194,255,.15);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.total span{
+  color:#91abc5;
+  font-size:12px;
+}
+
+.total strong{
+  font-size:23px;
+  color:#64ddff;
+}
+
+.guide{
+  background:rgba(8,22,42,.75);
+}
+
+.steps{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.step{
+  display:flex;
+  gap:11px;
+  align-items:flex-start;
+}
+
+.step-num{
+  min-width:27px;
+  height:27px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(24,162,255,.12);
+  color:#50d7ff;
+  border:1px solid rgba(55,197,255,.2);
+  font-size:11px;
+  font-weight:1000;
+}
+
+.step-text strong{
+  display:block;
+  font-size:12px;
+  margin-bottom:3px;
+}
+
+.step-text span{
+  color:#6f879f;
+  font-size:10px;
+  line-height:1.5;
+}
+
+/* ===== PAY BUTTON ===== */
+
+.confirm-box{
+  margin-top:18px;
+  padding:14px;
+  border-radius:14px;
+  background:rgba(0,0,0,.16);
+  border:1px solid rgba(71,169,235,.11);
+}
+
+.paid-check{
+  display:flex;
+  gap:9px;
+  align-items:center;
+  color:#839bb2;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.paid-check input{
+  width:18px;
+  height:18px;
+  accent-color:#1ce18e;
+}
+
+.create-btn{
+  width:100%;
+  margin-top:11px;
+  border:0;
+  border-radius:13px;
+  padding:15px;
+  color:#00101c;
+  background:linear-gradient(135deg,#2ad8ff,#178aff);
+  font-size:14px;
+  font-weight:1000;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(17,153,255,.2);
+  transition:.2s;
+}
+
+.create-btn:hover{
+  transform:translateY(-2px);
+}
+
+.create-btn:disabled{
+  cursor:not-allowed;
+  opacity:.38;
+  transform:none;
+  box-shadow:none;
+}
+
+/* ===== MODAL ===== */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(0,4,12,.78);
+  backdrop-filter:blur(8px);
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(440px,100%);
+  background:#07162b;
+  border:1px solid rgba(68,198,255,.25);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 30px 100px rgba(0,0,0,.55);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:15px;
+}
+
+.modal-head h3{
+  font-size:18px;
+}
+
+.close{
+  width:33px;
+  height:33px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);
+  background:#0d223d;
+  color:white;
+  cursor:pointer;
+}
+
+.qr{
+  width:220px;
+  height:220px;
+  margin:15px auto;
+  border-radius:15px;
+  background:
+    linear-gradient(90deg,#fff 10px,transparent 10px) 0 0/25px 25px,
+    linear-gradient(#fff 10px,transparent 10px) 0 0/25px 25px,
+    #111;
+  border:8px solid white;
+  display:grid;
+  place-items:center;
+  color:#111;
+  font-weight:1000;
+  font-size:14px;
+}
+
+.qr-text{
+  background:white;
+  padding:5px 8px;
+  border-radius:5px;
+}
+
+.modal-info{
+  padding:12px;
+  border-radius:12px;
+  background:#0b2039;
+  font-size:12px;
+  line-height:1.7;
+  color:#9bb0c6;
+}
+
+.paid-btn{
+  width:100%;
+  margin-top:12px;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#18df8b,#0caf70);
+  color:#001a10;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+/* ===== TOAST ===== */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,30px);
+  opacity:0;
+  pointer-events:none;
+  z-index:200;
+  padding:13px 18px;
+  border-radius:12px;
+  background:#102942;
+  border:1px solid rgba(65,200,255,.3);
+  box-shadow:0 15px 40px rgba(0,0,0,.4);
+  color:white;
+  font-size:12px;
+  font-weight:800;
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* ===== FOOTER ===== */
+
+.footer{
+  text-align:center;
+  color:#516a84;
+  font-size:11px;
+  margin-top:25px;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:900px){
+  .layout{
     grid-template-columns:1fr;
   }
 
+  .sidebar{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .summary{
+    grid-row:span 2;
+  }
+
+  .gojo-mini{
+    right:15px;
+    transform:scale(.75);
+    transform-origin:bottom right;
+  }
+}
+
+@media(max-width:650px){
+  .nav-inner{
+    padding:9px 13px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .container{
+    padding:15px 12px 40px;
+  }
+
+  .hero{
+    min-height:225px;
+    padding:24px 20px;
+  }
+
   .hero h1{
-    font-size:30px;
+    font-size:35px;
+  }
+
+  .hero p{
+    max-width:75%;
+  }
+
+  .gojo-mini{
+    opacity:.42;
+    right:-8px;
+    transform:scale(.68);
+  }
+
+  .packages{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .payment-methods{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
+  .sidebar{
+    display:flex;
+  }
+
+  .section{
+    padding:15px;
+  }
+}
+
+@media(max-width:390px){
+  .packages{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .package{
+    min-height:125px;
+  }
+
+  .payment-methods{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -204,202 +828,389 @@ input:focus,select:focus{
 
 <body>
 
-<div class="wrap">
+<!-- ================= NAV ================= -->
 
-  <div class="hero">
-    <h1>🎮 E-KENZO TOP-UP</h1>
-    <p>Top Up Game ងាយ • លឿន • សុវត្ថិភាព 🇰🇭</p>
-  </div>
+<nav class="nav">
+  <div class="nav-inner">
 
-  <div class="title">🎮 ជ្រើសរើសហ្គេម</div>
-
-  <div class="games">
-
-    <div class="game active" onclick="chooseGame('Free Fire',this)">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Garena%20Free%20Fire%20logo.svg" alt="Free Fire">
-      <div class="game-name">🔥 Free Fire</div>
+    <div class="logo">
+      <div class="logo-icon">E</div>
+      <div>E-<span>KENZO</span></div>
     </div>
 
-    <div class="game" onclick="chooseGame('PUBG Mobile',this)">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/PUBG%20Mobile%20Logo.svg" alt="PUBG Mobile">
-      <div class="game-name">🔫 PUBG Mobile</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#topup">Top Up</a>
+      <a href="#guide">Guide</a>
+      <a href="#contact">Contact</a>
     </div>
 
-    <div class="game" onclick="chooseGame('Mobile Legends',this)">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mobile%20Legends%20Bang%20Bang%20logo.svg" alt="Mobile Legends">
-      <div class="game-name">⚔️ Mobile Legends</div>
+    <a class="tg-btn"
+       href="https://t.me/"
+       target="_blank">
+      ✈ Telegram
+    </a>
+
+  </div>
+</nav>
+
+
+<main class="container" id="home">
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      ⚡ FAST • SAFE • EASY
     </div>
 
-    <div class="game" onclick="chooseGame('Roblox',this)">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Roblox%20Logo.svg" alt="Roblox">
-      <div class="game-name">🎮 Roblox</div>
+    <h1>
+      ROBLOX<br>
+      <span>TOP-UP</span>
+    </h1>
+
+    <p>
+      เติม Robux និង Roblox Plus ជាមួយ E-KENZO
+      <br>
+      រហ័ស • សុវត្ថិភាព • តម្លៃល្អ
+    </p>
+
+  </div>
+
+  <!-- Gojo Mini style -->
+  <div class="gojo-mini">
+
+    <div class="gojo-head">
+      <div class="gojo-hair"></div>
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+    </div>
+
+    <div class="gojo-body"></div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="layout">
+
+<div>
+
+<!-- PACKAGES -->
+
+<section class="section" id="topup">
+
+  <div class="section-title">
+    <div>
+      <h2>💎 ជ្រើសរើស Package</h2>
+      <p>Choose your Roblox package</p>
+    </div>
+  </div>
+
+
+  <div class="packages">
+
+    <div class="package"
+         data-name="80 Robux"
+         data-price="1.25"
+         onclick="selectPackage(this)">
+
+      <div class="check">✓</div>
+      <div class="package-icon">💎</div>
+      <h3>80 Robux</h3>
+      <div class="robux">ROBLOX</div>
+      <div class="price">$1.25</div>
+
+    </div>
+
+
+    <div class="package"
+         data-name="160 Robux"
+         data-price="2.50"
+         onclick="selectPackage(this)">
+
+      <div class="check">✓</div>
+      <div class="package-icon">💎</div>
+      <h3>160 Robux</h3>
+      <div class="robux">ROBLOX</div>
+      <div class="price">$2.50</div>
+
+    </div>
+
+
+    <div class="package"
+         data-name="500 Robux"
+         data-price="6.00"
+         onclick="selectPackage(this)">
+
+      <div class="check">✓</div>
+      <div class="package-icon">💎</div>
+      <h3>500 Robux</h3>
+      <div class="robux">ROBLOX</div>
+      <div class="price">$6.00</div>
+
+    </div>
+
+
+    <div class="package"
+         data-name="1000 Robux"
+         data-price="10.00"
+         onclick="selectPackage(this)">
+
+      <div class="check">✓</div>
+      <div class="package-icon">💎</div>
+      <h3>1000 Robux</h3>
+      <div class="robux">ROBLOX</div>
+      <div class="price">$10.00</div>
+
+    </div>
+
+
+    <div class="package"
+         data-name="2000 Robux"
+         data-price="19.00"
+         onclick="selectPackage(this)">
+
+      <div class="check">✓</div>
+      <div class="package-icon">💎</div>
+      <h3>2000 Robux</h3>
+      <div class="robux">ROBLOX</div>
+      <div class="price">$19.00</div>
+
+    </div>
+
+
+    <div class="package plus-card"
+         data-name="Roblox Plus 3 Months"
+         data-price="14.50"
+         onclick="selectPackage(this)">
+
+      <div class="check">✓</div>
+      <div class="package-icon">👑</div>
+      <h3>Roblox Plus</h3>
+      <div class="robux">3 MONTHS</div>
+      <div class="price">$14.50</div>
+
     </div>
 
   </div>
 
-  <div class="card">
 
-    <div class="title">💎 ជ្រើសរើស Package</div>
+  <!-- USER INFO -->
 
-    <div id="packages" class="packages"></div>
+  <div class="form">
+
+    <div class="section-title">
+      <div>
+        <h2>👤 ព័ត៌មានអតិថិជន</h2>
+        <p>Enter your account information</p>
+      </div>
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="field">
+
+        <label>Roblox Username</label>
+
+        <input
+          class="input"
+          id="robloxUsername"
+          type="text"
+          placeholder="ឧ. Kenzo123"
+          oninput="updateSummary()">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Telegram Username</label>
+
+        <input
+          class="input"
+          id="telegramUsername"
+          type="text"
+          placeholder="@username"
+          oninput="updateSummary()">
+
+      </div>
+
+    </div>
 
   </div>
 
-  <div class="card">
 
-    <div class="title">👤 Player ID</div>
+  <!-- PAYMENT -->
 
-    <label>Player ID</label>
-    <input id="playerId" type="text" placeholder="បញ្ចូល Player ID">
+  <div class="form">
 
-    <label>Zone ID <span class="small">(បើមាន)</span></label>
-    <input id="zoneId" type="text" placeholder="បញ្ចូល Zone ID">
+    <div class="section-title">
+      <div>
+        <h2>💳 Payment Method</h2>
+        <p>ជ្រើសរើសវិធីបង់ប្រាក់</p>
+      </div>
+    </div>
+
+
+    <div class="payment-methods">
+
+      <div class="pay"
+           onclick="selectPayment(this,'KHQR')">
+
+        <strong>▣ KHQR</strong>
+        Scan QR
+
+      </div>
+
+
+      <div class="pay"
+           onclick="selectPayment(this,'ABA')">
+
+        <strong>ABA</strong>
+        Transfer
+
+      </div>
+
+
+      <div class="pay"
+           onclick="selectPayment(this,'WING')">
+
+        <strong>WING</strong>
+        Transfer
+
+      </div>
+
+    </div>
+
+
+    <div class="confirm-box">
+
+      <label class="paid-check">
+
+        <input
+          type="checkbox"
+          id="paidCheck"
+          onchange="paymentCheckboxChanged()">
+
+        <span>
+          ខ្ញុំបានបង់ប្រាក់រួចហើយ
+        </span>
+
+      </label>
+
+
+      <button
+        class="create-btn"
+        id="createBtn"
+        disabled
+        onclick="createPreOrder()">
+
+        🔒 CREATE PRE-ORDER
+
+      </button>
+
+    </div>
 
   </div>
 
-  <div class="card">
+</section>
 
-    <div class="title">💳 ជ្រើសរើសការទូទាត់</div>
 
-    <select id="payment">
-      <option value="KHQR">🇰🇭 KHQR</option>
-      <option value="ABA">🏦 ABA</option>
-      <option value="Wing">💵 Wing</option>
-    </select>
+<!-- GUIDE -->
 
-    <button class="order" onclick="orderNow()">
-      🛒 បញ្ជាទិញឥឡូវនេះ
-    </button>
+<section class="section" id="guide" style="margin-top:20px">
 
-    <div id="result"></div>
+  <div class="section-title">
+    <div>
+      <h2>📖 របៀបទិញ</h2>
+      <p>Simple 4 steps</p>
+    </div>
+  </div>
+
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <strong>ជ្រើសរើស Package</strong>
+        <span>ជ្រើសរើសចំនួន Robux ឬ Roblox Plus ដែលអ្នកចង់ទិញ។</span>
+      </div>
+    </div>
+
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <strong>បញ្ចូល Username</strong>
+        <span>បញ្ចូល Roblox Username និង Telegram Username របស់អ្នក។</span>
+      </div>
+    </div>
+
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <strong>បង់ប្រាក់</strong>
+        <span>ជ្រើសរើស KHQR / ABA / WING ហើយធ្វើការបង់ប្រាក់។</span>
+      </div>
+    </div>
+
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        <strong>Create Pre-Order</strong>
+        <span>Tick ថាបានបង់ប្រាក់រួច ហើយចុច CREATE PRE-ORDER។</span>
+      </div>
+    </div>
 
   </div>
+
+</section>
 
 </div>
 
-<script>
 
-const data = {
+<!-- ================= SIDEBAR ================= -->
 
-  "Free Fire":[
-    ["100 Diamonds","2,500៛"],
-    ["310 Diamonds","7,000៛"],
-    ["520 Diamonds","11,000៛"],
-    ["1060 Diamonds","22,000៛"]
-  ],
+<aside class="sidebar">
 
-  "PUBG Mobile":[
-    ["60 UC","2,500៛"],
-    ["325 UC","12,000៛"],
-    ["660 UC","23,000៛"],
-    ["1800 UC","60,000៛"]
-  ],
+<section class="section summary">
 
-  "Mobile Legends":[
-    ["86 Diamonds","3,000៛"],
-    ["172 Diamonds","6,000៛"],
-    ["257 Diamonds","9,000៛"],
-    ["706 Diamonds","24,000៛"]
-  ],
+  <div class="section-title">
+    <div>
+      <h2>🧾 Order Summary</h2>
+      <p>Your order</p>
+    </div>
+  </div>
 
-  "Roblox":[
-    ["80 Robux","3,500៛"],
-    ["400 Robux","15,000៛"],
-    ["800 Robux","29,000៛"],
-    ["1700 Robux","59,000៛"]
-  ]
 
-};
+  <div class="order-id" id="orderId">
+    Order ID: EKZ-000000
+  </div>
 
-let currentGame="Free Fire";
-let currentPackage="";
 
-function chooseGame(game,element){
+  <div class="summary-row">
+    <span>Package</span>
+    <span id="summaryPackage">Not selected</span>
+  </div>
 
-  currentGame=game;
-  currentPackage="";
 
-  document.querySelectorAll(".game").forEach(x=>{
-    x.classList.remove("active");
-  });
+  <div class="summary-row">
+    <span>Roblox</span>
+    <span id="summaryRoblox">-</span>
+  </div>
 
-  element.classList.add("active");
 
-  renderPackages();
-}
-
-function renderPackages(){
-
-  const box=document.getElementById("packages");
-
-  box.innerHTML="";
-
-  data[currentGame].forEach((item,index)=>{
-
-    const div=document.createElement("div");
-
-    div.className="pack";
-
-    div.onclick=function(){
-
-      document.querySelectorAll(".pack").forEach(x=>{
-        x.classList.remove("active");
-      });
-
-      div.classList.add("active");
-
-      currentPackage=item[0]+" - "+item[1];
-    };
-
-    div.innerHTML=`
-      <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f48e.svg">
-      <strong>${item[0]}</strong>
-      <div class="price">${item[1]}</div>
-    `;
-
-    box.appendChild(div);
-
-  });
-
-}
-
-function orderNow(){
-
-  const player=document.getElementById("playerId").value.trim();
-  const zone=document.getElementById("zoneId").value.trim();
-  const payment=document.getElementById("payment").value;
-
-  if(!currentPackage){
-    alert("សូមជ្រើសរើស Package ជាមុនសិន!");
-    return;
-  }
-
-  if(!player){
-    alert("សូមបញ្ចូល Player ID!");
-    return;
-  }
-
-  const result=document.getElementById("result");
-
-  result.style.display="block";
-
-  result.innerHTML=`
-    <strong>✅ ព័ត៌មានការបញ្ជាទិញ</strong><br><br>
-    🎮 ហ្គេម: ${currentGame}<br>
-    💎 Package: ${currentPackage}<br>
-    👤 Player ID: ${player}<br>
-    🆔 Zone ID: ${zone || "មិនបានបញ្ចូល"}<br>
-    💳 Payment: ${payment}<br><br>
-    <span class="small">
-    សូមទាក់ទងអ្នកលក់ ដើម្បីបន្តការទូទាត់ និងបញ្ចូល Top-Up។
-    </span>
-  `;
-
-}
-
-renderPackages();
-
-</script>
-
-</body>
-  </html>
+  <div class="summary-row">
+    <span>Telegram</span>
+    <span id
