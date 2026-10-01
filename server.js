@@ -25,7 +25,7 @@ function sendTelegram(chatId, text) {
       (res) => {
         let body = "";
         res.on("data", (chunk) => body += chunk);
-        res.on("end", () => resolve(body));
+        res.on("end", () => { console.log("Webhook result:", body); resolve(body); });
       }
     );
 
