@@ -43,7 +43,36 @@ function getBody(req) {
     req.on("error", reject);
   });
 }
+function setWebhook() {
+  return new Promise((resolve, reject) => {
+    const webhookUrl =
+      "https://e-kenzo-github-io-1-qfnt.onrender.com/telegram/webhook";
 
+    const data = JSON.stringify({
+      url: webhookUrl
+    });
+
+    const req = https.request(
+      `https://api.telegram.org/bot${BOT_TOKEN}/setWebhook`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(data)
+        }
+      },
+      (res) => {
+        let body = "";
+        res.on("data", chunk => body += chunk);
+        res.on("end", () => resolve(body));
+      }
+    );
+
+    req.on("error", reject);
+    req.write(data);
+    req.end();
+  });
+                     }
 const server = http.createServer(async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -123,4 +152,5 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`E-KENZO server running on port ${PORT}`);
+  setWebhook();
 });
